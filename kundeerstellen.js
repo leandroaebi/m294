@@ -1,4 +1,12 @@
-/* Funktion zum Erstellen eines Kunden */
+/**
+ * Funktion zum Erstellen eines Kunden
+ * 
+ * @async
+ * @function performKunde
+ * @description Erstellt einen neuen Kunden und sendet die Daten an die API.
+ * @returns {void}
+ * @author Leandro Aebi
+ */
 async function performKunde() {
     const vorname = document.getElementById('vornameid').value;
     const nachname = document.getElementById('nachnameid').value;
@@ -8,8 +16,7 @@ async function performKunde() {
     const zip = document.getElementById('zipid').value;
     const ort = document.getElementById('ortid').value;
 
-
-  /* Kundendaten speichern */  
+    // Kundendaten speichern
     const kundenData = {
         firstname: vorname,
         lastname: nachname,
@@ -20,7 +27,7 @@ async function performKunde() {
         city: ort
     };
 
-    /* POST Funktion um ein neuer Kunde zu erstellen */
+    // POST Funktion um einen neuen Kunden zu erstellen
     const response = await fetch('http://192.168.1.92:8080/library/customer', {
         method: 'POST',
         headers: {
@@ -37,23 +44,35 @@ async function performKunde() {
     }
 }
 
+/**
+ * Funktion zur Initialisierung der Kundendaten beim Laden der Seite
+ * 
+ * @function
+ * @description Lädt die gespeicherten Kundendaten aus dem localStorage und füllt die Formularfelder damit aus.
+ * @returns {void}
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const customer = JSON.parse(localStorage.getItem('selectedCustomer'));
+    if (customer) {
+        document.getElementById('vornameid').value = customer.firstname;
+        document.getElementById('nachnameid').value = customer.lastname;
+        document.getElementById('geburtsdatumid').value = formatDate(customer.birthdate);
+        document.getElementById('emailid').value = customer.email;
+        document.getElementById('strassenid').value = customer.street;
+        document.getElementById('zipid').value = customer.zip;
+        document.getElementById('ortid').value = customer.city;
+    }
+});
 
- document.addEventListener('DOMContentLoaded', () => {
-          const customer = JSON.parse(localStorage.getItem('selectedCustomer'));
-          if (customer) {
-              document.getElementById('vornameid').value = customer.firstname;
-              document.getElementById('nachnameid').value = customer.lastname;
-              document.getElementById('geburtsdatumid').value = formatDate(customer.birthdate);
-              document.getElementById('emailid').value = customer.email;
-              document.getElementById('strassenid').value = customer.street;
-              document.getElementById('zipid').value = customer.zip;
-              document.getElementById('ortid').value = customer.city;
-          }
-      });
-
-
+/**
+ * Funktion zum Aktualisieren eines Kunden
+ * 
+ * @async
+ * @function performUpdateKunde
+ * @description Aktualisiert die Daten eines bestehenden Kunden und sendet die aktualisierten Daten an die API.
+ * @returns {void}
+ */
 async function performUpdateKunde() {
-    
     const customer = JSON.parse(localStorage.getItem('selectedCustomer'));
     const id = customer.id;
 
@@ -74,10 +93,8 @@ async function performUpdateKunde() {
         },
         body: JSON.stringify(kundenData)
     });
-    console.log(kundenData);
-    console.log(id);
-    console.log(response);
-    if (response) {
+
+    if (response.ok) {
         alert('Kunde erfolgreich aktualisiert!');
         window.location.href = 'kundentabelle.html'; // Gehe zur Kundentabelle
     } else {
@@ -85,10 +102,16 @@ async function performUpdateKunde() {
     }
 }
 
+/**
+ * Funktion zum Löschen eines Kunden
+ * 
+ * @async
+ * @function submitDelete
+ * @description Löscht einen bestehenden Kunden anhand der ID und sendet die Anfrage an die API.
+ * @returns {void}
+ */
 async function submitDelete() {
-    ///
     const customer = JSON.parse(localStorage.getItem('selectedCustomer'));
-    
     const id = customer.id;
 
     const response = await fetch(`http://192.168.1.92:8080/library/customer/${id}`, {
@@ -107,6 +130,14 @@ async function submitDelete() {
     }
 }
 
+/**
+ * Funktion zur Formatierung eines Datumsstrings
+ * 
+ * @function formatDate
+ * @description Formatiert einen Datumsstring in das Format YYYY-MM-DD.
+ * @param {string} dateString - Der Datumsstring, der formatiert werden soll.
+ * @returns {string} Der formatierte Datumsstring.
+ */
 function formatDate(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();

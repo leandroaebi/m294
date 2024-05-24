@@ -1,19 +1,34 @@
-
-
+/**
+ * Funktion zum Abrufen der Mediendaten von der API
+ * 
+ * @async
+ * @function GetData
+ * @description Ruft die Mediendaten von der API ab und erstellt eine Tabelle mit den erhaltenen Daten.
+ * @returns {void}
+ * @author Leandro Aebi
+ */
 async function GetData() {
   const request = await fetch('http://192.168.1.92:8080/library/medium');
   const response = await request.json();
   createTable(response);
 }
 
+/**
+ * Funktion zum Erstellen einer Tabelle mit den Mediendaten
+ * 
+ * @function createTable
+ * @description Erstellt eine HTML-Tabelle mit den bereitgestellten Mediendaten und fügt sie in den DOM ein.
+ * @param {Array} data - Ein Array von Mediendaten, die in der Tabelle angezeigt werden sollen.
+ * @returns {void}
+ */
 function createTable(data) {
   const tableContainer = document.getElementById('table-container');
   
-  // Create table element
+  //Erstellt ein Tabellenelemt
   const table = document.createElement('table');
   table.classList.add('data-table');
   
-  // Create table header
+  // Erstellt die Tabellenüberschrift
   const thead = document.createElement('thead');
   const headerRow = document.createElement('tr');
   const headers = ['Inventarnummer', 'Titel', 'Autor'];
@@ -22,15 +37,12 @@ function createTable(data) {
     const th = document.createElement('th');
     th.textContent = headerText;
     headerRow.appendChild(th);
-
-   
-    
   });
   
   thead.appendChild(headerRow);
   table.appendChild(thead);
   
-  // Create table body
+  //Erstellt den Body der Tabelle
   const tbody = document.createElement('tbody');
   
   data.forEach(item => {
@@ -51,24 +63,17 @@ function createTable(data) {
     tbody.appendChild(row);
 
     row.onclick = () => {
-
-       // Kundeninformationen in localStorage speichern
+       // Mediendaten in localStorage speichern
        localStorage.setItem('selectedMedium', JSON.stringify(item));
-
-      window.location.href = 'medienformular.html';
-
-          
-  };
-  
-  tbody.appendChild(row);
-});
+       window.location.href = 'medienformular.html';
+    };
+    
+    tbody.appendChild(row);
+  });
   
   table.appendChild(tbody);
   tableContainer.appendChild(table);
 }
 
 localStorage.removeItem('selectedCustomer');
-GetData()
-   
-
-
+GetData();

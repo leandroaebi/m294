@@ -1,4 +1,13 @@
-/* Funktion zur Durchführung einer Ausleihe */
+/**
+ * Funktion zur Durchführung einer Ausleihe
+ * 
+ * @async
+ * @function performMedium
+ * @description Erstellt ein neues Medium und sendet es an den Server.
+ * @returns {void}
+ * 
+ * @author Leandro Aebi
+ */
 async function performMedium() {
     // Werte aus den Eingabefeldern abrufen
     const autorId = document.getElementById('autorId').value;
@@ -7,7 +16,6 @@ async function performMedium() {
     let fskId = document.getElementById('fskId').value;
     const eanid = document.getElementById('eanId').value;
     const locationId = document.getElementById('locationId').value;
-
 
     // Mediumdaten erstellen
     if (fskId == "") {
@@ -22,7 +30,7 @@ async function performMedium() {
             fsk: fskId,
             ean: eanid,
             location: locationId
-    }
+    };
     
     // Anfrage an den Server senden
     console.log(JSON.stringify(mediumData));
@@ -55,8 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
-
+/**
+ * Funktion zum Aktualisieren eines Mediums
+ * 
+ * @async
+ * @function performUpdateMedium
+ * @description Aktualisiert die Daten eines bestehenden Mediums und sendet die Änderungen an den Server.
+ * @returns {void}
+ */
 async function performUpdateMedium() {
     const medium = JSON.parse(localStorage.getItem('selectedMedium'));
 
@@ -65,11 +79,11 @@ async function performUpdateMedium() {
         title: document.getElementById('titelId').value,
         genre: document.getElementById('genreId').value,
         fsk: document.getElementById('fskId').value || null,
-        ean: eanid,
+        ean: document.getElementById('eanId').value,
         location: document.getElementById('locationId').value
     };
 
-    const response = await fetch(`http://192.168.1.92:8080/library/medium/${id}`, {
+    const response = await fetch(`http://192.168.1.92:8080/library/medium/${medium.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -85,6 +99,14 @@ async function performUpdateMedium() {
     }
 }
 
+/**
+ * Funktion zum Löschen eines Mediums
+ * 
+ * @async
+ * @function deleteMedium
+ * @description Löscht ein Medium aus der Datenbank und sendet die Anfrage an den Server.
+ * @returns {void}
+ */
 async function deleteMedium() {
     const medium = JSON.parse(localStorage.getItem('selectedMedium'));
 
@@ -105,6 +127,3 @@ async function deleteMedium() {
         alert('Löschen des Mediums fehlgeschlagen.');
     }
 }
-
-
-
