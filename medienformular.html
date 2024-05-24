@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+        <title> Welcome </title>
+</head>
+<body>
+  <main>
+    <nav>
+        <div class="logo">
+            <h4>Ausleihe tätigen</h4>
+        </div>
+        <ul class="nav-links"> 
+            <a href="kundenerstellen.html"> Kunden erstellen </a>
+            <a href="kundentabelle.html"> Kunden anzeigen</a>
+            <a href="medienformular.html"> Medium erstellen</a>
+            <a href="index.html"> Medien anzeigen </a>
+            <a href="ausleihetaetigen.html"> Ausleihe tätigen </a>
+            <a href="ausleihetabelle.html"> Ausleihen anzeigen</a>
+        </ul>
+        <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+      </nav>
+      <div class="table-container">
+        <div class="form__group field">
+          <input type="input" class="form__field" placeholder="Titel" name="titelId" id='titelId' required />
+          <label for="titelId" class="form__label">Titel</label>
+      </div>
+      <div class="form__group field">
+          <input type="input" class="form__field" placeholder="Autor" name="autorId" id='autorId' required />
+          <label for="autorId" class="form__label">Autor</label>
+      </div>
+      <div class="form__group field">
+        <input type="input" class="form__field" placeholder="Genre" name="genreId" id='genreId' required />
+        <label for="genreId" class="form__label">Genre</label>
+    </div>
+    <div class="form__group field">
+      <input type="input" class="form__field" placeholder="FSK" name="fskId" id='fskId' required />
+      <label for="fskId" class="form__label">FSK</label>
+  </div>
+  <div class="form__group field">
+    <input type="input" class="form__field" placeholder="EAN" name="eanId" id='eanId' required />
+    <label for="eanId" class="form__label">EAN</label>
+</div>
+<div class="form__group field">
+  <input type="input" class="form__field" placeholder="Location" name="locationId" id='locationId' required />
+  <label for="locationId" class="form__label">Location</label>
+</div>
+        <div class="button-container-"> <button class="bntFormMediumErstellen" onclick="performMedium()">erstellen </button> </div>
+        <div class="button-container"> <button class="bntMediumAendern" onclick="updateMedium()">ändern </button></div>
+        <div class="button-container"> <button class="bntMediumloeschen" onclick="deleteMedium()" >löschen </button></div>
+      </div>
+      <script src="medienformular.js"></script>
+      <script src="menu.js"></script>
+</main>
+      
+</body>
+</html>

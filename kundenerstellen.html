@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Welcome</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <div class="logo">
+                <h4>Ausleihe tätigen</h4>
+            </div>
+            <ul class="nav-links">
+                <a href="kundenerstellen.html">Kunden erstellen</a>
+                <a href="kundentabelle.html">Kunden anzeigen</a>
+                <a href="medienformular.html">Medium erstellen</a>
+                <a href="index.html">Medien anzeigen</a>
+                <a href="ausleihetaetigen.html">Ausleihe tätigen</a>
+                <a href="ausleihetabelle.html">Ausleihen anzeigen</a>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+        <div class="table-container">
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Vorname" name="vornameid" id="vornameid" required />
+                <label for="vornameid" class="form__label">Vorname</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Nachname" name="nachnameid" id="nachnameid" required />
+                <label for="nachnameid" class="form__label">Nachname</label>
+            </div>
+            <div class="form__group field">
+                <input type="date" class="form__field" placeholder="Geburtsdatum" name="geburtsdatumid" id="geburtsdatumid" required />
+                <label for="geburtsdatumid" class="form__label">Geburtsdatum</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Email" name="emailid" id="emailid" required />
+                <label for="emailid" class="form__label">Email</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Strasse" name="strassenid" id="strassenid" required />
+                <label for="strassenid" class="form__label">Strasse</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Zip" name="zipid" id="zipid" required />
+                <label for="zipid" class="form__label">Zip</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Ort" name="ortid" id="ortid" required />
+                <label for="ortid" class="form__label">Ort</label>
+            </div>
+            <div class="button-container"> <button class="bntFormMediumErstellen" onclick="performKunde()">Erstellen</button> </div>
+            <div class="button-container"> <button class="bntMediumAendern" onclick="performUpdateKunde()">Ändern</button> </div>
+            <div class="button-container"> <button class="bntMediumloeschen" onclick="submitDelete()">Löschen</button> </div>
+        </div>
+        <script src="kundeerstellen.js"></script>
+        <script src="menu.js"></script>
+    </main>
+</body>
+</html>
